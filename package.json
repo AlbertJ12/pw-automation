@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/AlbertJ12/pw-automation#readme",
   "devDependencies": {
-    "@playwright/test": "^1.37.1"
+    "@playwright/test": "^1.37.1",
+    "@types/bcrypt": "^5.0.0"
   }
 }
