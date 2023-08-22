@@ -1,20 +1,14 @@
 import { test, expect } from '@playwright/test';
 import { ThinkingTesterContactListPage } from '../pages/thinking-tester-contact-list-page';
+const fs = require('fs');
+var data = fs.readFileSync('secret.json');
+var secretObj = JSON.parse(data);
 
-test('getting started should contain table of contents', async ({ page }) => {
+
+test('add user through API', async ({ page }) => {
   const contactListPage = new ThinkingTesterContactListPage(page);
   await contactListPage.goto();
-  await contactListPage.getStarted();
-  await expect(contactListPage.tocList).toHaveText([
-    `How to install Playwright`,
-    `What's Installed`,
-    `How to run the example test`,
-    `How to open the HTML test report`,
-    `Write tests using web first assertions, page fixtures and locators`,
-    `Run single test, multiple tests, headed mode`,
-    `Generate tests with Codegen`,
-    `See a trace of your tests`
-  ]);
+  
 });
 
 test('should show Page Object Model article', async ({ page }) => {
@@ -24,6 +18,23 @@ test('should show Page Object Model article', async ({ page }) => {
   await expect(page.locator('article')).toContainText('Page Object Model is a common pattern');
 });
 
+
+test('add new user through API', async ({ request }, user) => {
+  const newIssue = await request.post(`https://thinking-tester-contact-list.herokuapp.com/`, {
+    data: {
+      title: `${secretObj.users}`,
+      body: 'Bug description',
+    }
+  });
+  expect(newIssue.ok()).toBeTruthy();
+
+  // const issues = await request.get(`/repos/${USER}/${REPO}/issues`);
+  // expect(issues.ok()).toBeTruthy();
+  // expect(await issues.json()).toContainEqual(expect.objectContaining({
+  //   title: '[Bug] report 1',
+  //   body: 'Bug description'
+  // }));
+});
 
 /*
 Ideas:

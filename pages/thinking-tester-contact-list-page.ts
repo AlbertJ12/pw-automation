@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from '@playwright/test';
-import {} from '../helpers/api-calls';
+import { APIHelper } from '../helpers/api-calls';
+// const  api = new APIHelper();
 
 export class ThinkingTesterContactListPage {
   readonly page: Page;
@@ -20,9 +21,9 @@ export class ThinkingTesterContactListPage {
     // this.tocList = page.locator('article div.markdown ul > li > a');
   }
 
-  async addUserAPI() {
-
-  }
+  // async addUserAPI(firstName, lastName, email, password) {
+  //   await api.addUser({ request }, firstName, lastName, email, password);
+  // }
 
   async goto() {
     await this.page.goto('https://thinking-tester-contact-list.herokuapp.com/');
